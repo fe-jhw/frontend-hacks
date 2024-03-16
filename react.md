@@ -41,3 +41,6 @@ export default authSlice.reducer;
 
 ```
 
+## 유용한 라이브러리
+
+- React Icons: https://react-icons.github.io/react-icons/ (icon 다 모아놈)
