@@ -83,7 +83,10 @@ Next에서는 Suspense로 감싸주고 fallback에 loading시 보여줄 ui를 �
 
 ## Skeleton
 
-MUI, shadcn/ui의 Skeleton 컴포넌트 활용
+1) MUI, shadcn/ui의 Skeleton 컴포넌트 활용
+2) react-loading-skeleton 사용
+3) react-content-loader 사용
+4) 직접 구현
 
 ```tsx
 import './Skeleton.css';
@@ -93,13 +96,7 @@ import React from 'react';
 const Skeleton = () => {
   return (
     <li className="skeleton-item">
-      <div>
-        <div className="skeleton-img" />
-      </div>
-      <div className="skeleton-info">
-        <p className="skeleton-name" />
-        <p className="skeleton-email" />
-      </div>
+      <p className="skeleton-email" />
     </li>
   );
 );
@@ -128,51 +125,12 @@ export default Skeleton;
   position: relative;
 }
 
-.skeleton-img::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 100%;
-  background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
-  animation: loading 2s infinite linear;
-}
-
-.skeleton-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: #f2f2f2;
-  position: relative;
-  overflow: hidden;
-}
-
 .skeleton-info {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-left: 10px;
-}
-
-.skeleton-name {
-  width: 70%;
-  height: 18px;
-  background: #f2f2f2;
-  position: relative;
-  overflow: hidden;
-}
-
-.skeleton-name::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30px;
-  height: 100%;
-  background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
-  animation: loading 2s infinite linear;
 }
 
 .skeleton-email {
@@ -194,10 +152,23 @@ export default Skeleton;
   background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
   animation: loading 2s infinite linear;
 }
-
 ```
 
+## API 많은 데이터 호출 시 최적화 방식
 
+1. 페이지네이션 (내 repo nextjs-dashboard)
+   - 구조, 계층 제공
+   - 레이아웃 유지
+   - CMS 에 적합
+2. 무한 스크롤 (내 repo react-utils useIntersectionObserver 참조)
+   - 쉬움, 사용자 경험
+   - 모바일에 적합
+   - 사용자가 맨 하단 볼 시 맨 하단에 빈 컴포넌트 놓고, intersectionObserver 활용하여 보일 시에 fetch
+   - windowing 활용해서 너무 많은 dom 렌더링 하지 않도록 해야함
+
+상황에 따라 적절한 방식을 사용하자
+
+- 백엔드에 페이지네이션 용으로 만든 api를 써서 2가지 방식 다 구현할 수 있다.
 
 ## 유용한 라이브러리
 
