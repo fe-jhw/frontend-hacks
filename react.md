@@ -45,6 +45,8 @@ export default authSlice.reducer;
 
 loading 상태관리를 hook으로 따로 빼서 관리
 
+react-query 추천: 위 기능 + 여러 강력한 기능, 서버 상태 관리에 좋음
+
 ```tsx
 const app = () => {
     const [loading, products] = useLoading('/api/products')
@@ -78,6 +80,124 @@ Next에서는 Suspense로 감싸주고 fallback에 loading시 보여줄 ui를 �
 	{products}
 </Suspense>
 ```
+
+## Skeleton
+
+MUI, shadcn/ui의 Skeleton 컴포넌트 활용
+
+```tsx
+import './Skeleton.css';
+
+import React from 'react';
+
+const Skeleton = () => {
+  return (
+    <li className="skeleton-item">
+      <div>
+        <div className="skeleton-img" />
+      </div>
+      <div className="skeleton-info">
+        <p className="skeleton-name" />
+        <p className="skeleton-email" />
+      </div>
+    </li>
+  );
+);
+
+export default Skeleton;
+```
+
+```css
+@keyframes loading {
+  0% {
+    transform: translateX(0);
+  }
+  50%,
+  100% {
+    transform: translateX(460px);
+  }
+}
+
+.skeleton-item {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+}
+
+.skeleton-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
+  animation: loading 2s infinite linear;
+}
+
+.skeleton-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #f2f2f2;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
+.skeleton-name {
+  width: 70%;
+  height: 18px;
+  background: #f2f2f2;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-name::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
+  animation: loading 2s infinite linear;
+}
+
+.skeleton-email {
+  width: 85%;
+  height: 18px;
+  background: #f2f2f2;
+  margin-top: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-email::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(to right, #f2f2f2, #ddd, #f2f2f2);
+  animation: loading 2s infinite linear;
+}
+
+```
+
+
 
 ## 유용한 라이브러리
 
