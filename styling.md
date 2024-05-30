@@ -266,3 +266,14 @@ transform: translate(-50%, -50%);
 }
 ```
 
+## 특정 영역으로 남은 화면 꽉 채우고, 해당 영역 스크롤 가능하게 하기
+```css
+.area {
+    flex: auto;
+    overflow: auto
+}
+```
+
+```tsx
+<area className="flex-auto overflow-auto">
+```
