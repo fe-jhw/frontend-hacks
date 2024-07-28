@@ -277,3 +277,13 @@ transform: translate(-50%, -50%);
 ```tsx
 <area className="flex-auto overflow-auto">
 ```
+
+## input, textarea 안에 버튼 넣는법
+input, textarea 에 버튼 넣고싶은 위치쪽 방향에 border를 버튼 너비만큼 준다.
+버튼은 absolute로해서 input, textarea 안에 들어갈 수 있게 위치를 지정한다.
+```tsx
+<div className="relative flex h-[60px] w-full justify-center xl:w-2/3">
+  <Input className="border-l-[6rem] border-transparent" />
+  <Button className="absolute left-0 w-[6rem] />
+</div>
+```
